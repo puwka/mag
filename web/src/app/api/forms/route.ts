@@ -1,0 +1,46 @@
+import { NextResponse } from "next/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+import type { FormType } from "@/lib/types";
+
+const ALLOWED: FormType[] = [
+  "contact",
+  "price_list",
+  "product_request",
+  "product_selection",
+  "partnership",
+  "logo_application",
+];
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const formType = body.formType as FormType;
+    if (!ALLOWED.includes(formType)) {
+      return NextResponse.json({ error: "Неизвестный тип формы" }, { status: 400 });
+    }
+    const payload = body.payload;
+    if (!payload || typeof payload !== "object") {
+      return NextResponse.json({ error: "Пустая форма" }, { status: 400 });
+    }
+
+    // Prefer anon insert via service role only for reliability after validation
+    const sb = createAdminClient();
+    const { error } = await sb.from("form_submissions").insert({
+      form_type: formType,
+      payload,
+      product_id: body.productId || null,
+      product_url: body.productUrl || null,
+      status: "new",
+      user_agent: req.headers.get("user-agent")?.slice(0, 500) ?? null,
+    });
+
+    if (error) {
+      console.error(error);
+      return NextResponse.json({ error: "Не удалось сохранить заявку" }, { status: 500 });
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
+  }
+}

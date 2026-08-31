@@ -1,0 +1,61 @@
+# supabase CLI cache
+supabase/.temp/
+
+# secrets
+.env
+.env.*
+!.env.local.example
+!**/.env.example
+
+# dependencies / build
+node_modules/
+web/node_modules/
+web/.next/
+web/out/
+web/.vercel/
+**/*.tsbuildinfo
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.pem
+
+# debug / scrape leftovers (reference HTML from vitex37.ru analysis)
+_p.html
+web/_p.html
+about.html
+base.min.css
+cart.html
+cat-sitemap.xml
+categories.json
+category.html
+category_live.html
+checkout.html
+child-style.css
+contact.html
+dostavka.html
+fetch_*.html
+_fetch_*.html
+header.css
+homepage.html
+logo.html
+oplata.html
+opt.html
+page-sitemap.xml
+pages.json
+prajs.html
+privacy.html
+product-sitemap.xml
+product.html
+shop.html
+sitemap_index.xml
+theme_settings.css
+_all_urls.txt
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
