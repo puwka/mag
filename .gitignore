@@ -5,15 +5,14 @@ supabase/.temp/
 .env
 .env.*
 !.env.local.example
-!**/.env.example
+!.env.example
 
 # dependencies / build
 node_modules/
-web/node_modules/
-web/.next/
-web/out/
-web/.vercel/
-**/*.tsbuildinfo
+.next/
+out/
+.vercel/
+*.tsbuildinfo
 
 # OS / IDE
 .DS_Store
@@ -24,7 +23,6 @@ Thumbs.db
 
 # debug / scrape leftovers (reference HTML from vitex37.ru analysis)
 _p.html
-web/_p.html
 about.html
 base.min.css
 cart.html

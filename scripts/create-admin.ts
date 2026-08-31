@@ -1,6 +1,6 @@
 /**
  * Create or reset CMS admin user and verify password login.
- * Usage: cd web && npm run create-admin
+ * Usage: npm run create-admin
  */
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync, existsSync } from "fs";

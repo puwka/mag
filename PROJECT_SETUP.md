@@ -16,11 +16,10 @@ Production-ready копия **vitex37.ru** на Next.js 15 + Supabase (Postgres,
 ## 2. Клонирование и зависимости
 
 ```bash
-cd web
 npm install
 ```
 
-Корень репозитория: `d:\mag` (или ваш путь). Приложение — в каталоге `web/`.
+Приложение в корне репозитория (`package.json`, `src/`). Рядом — `supabase/`.
 
 ---
 
@@ -29,7 +28,7 @@ npm install
 Скопируйте пример:
 
 ```bash
-cp ../.env.local.example .env.local
+cp .env.example .env.local
 ```
 
 Заполните:
@@ -87,7 +86,6 @@ npx supabase db push
 Создание администратора:
 
 ```bash
-cd web
 npm run create-admin
 ```
 
@@ -124,7 +122,6 @@ npm run create-admin
 ## 8. Наполнение контентом
 
 ```bash
-cd web
 npm run seed          # категории, товары, меню, главная, страницы, settings
 npm run create-admin  # учётка CMS
 ```
@@ -134,7 +131,6 @@ npm run create-admin  # учётка CMS
 ## 9. Локальный запуск
 
 ```bash
-cd web
 npm run dev
 ```
 
@@ -148,13 +144,12 @@ npm run dev
 ## 10. Production build и Vercel
 
 ```bash
-cd web
 npm run build
 npm run start
 ```
 
-**Vercel:** Root Directory = `web`, Node 20+, env из таблицы в §3.  
-Пошагово: GitHub + Vercel → [DEPLOY.md](./DEPLOY.md).
+**Vercel:** Root Directory пустой (приложение в корне), Node 20+, env из §3.  
+Пошагово: [DEPLOY.md](./DEPLOY.md).
 
 Чеклист перед деплоем:
 
@@ -172,7 +167,7 @@ npm run start
 ## 11. Структура приложения
 
 ```
-web/src/app/
+src/app/
   (storefront)/     # витрина + SiteShell
   admin/            # CMS (login + panel)
   api/orders|forms  # гостевые заявки (service_role на сервере)

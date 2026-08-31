@@ -1,6 +1,6 @@
 /**
  * Seed public content into Supabase (run once after migrations).
- * Usage: cd web && npx tsx scripts/seed.ts
+ * Usage: npx tsx scripts/seed.ts
  * Uses SUPABASE_SERVICE_ROLE_KEY from .env.local — never expose to browser.
  */
 import { createClient } from "@supabase/supabase-js";

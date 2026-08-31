@@ -12,7 +12,6 @@
 ## Быстрый старт
 
 ```bash
-cd web
 cp ../.env.local.example .env.local   # заполните ключи
 npm install
 # примените SQL миграции 001–012 в Supabase
