@@ -65,22 +65,23 @@ git push
 
 ## 2. Подключить Vercel
 
-1. Откройте [vercel.com](https://vercel.com) → **Add New Project** → Import репозитория с GitHub.
-2. **Root Directory**: нажмите *Edit* → укажите **`web`**.
-3. Framework Preset: **Next.js** (подхватится сам).
-4. Build Command: `npm run build`  
-   Install Command: `npm install`  
-   Output: по умолчанию для Next.js.
-5. **Environment Variables** (Production + Preview):
+> **Важно:** если открыть сайт и видите голый `NOT_FOUND` (не страница 404 сайта) —
+> почти всегда не задан **Root Directory = `web`**.
+
+1. Откройте [vercel.com](https://vercel.com) → ваш проект **mag** → **Settings** → **General**.
+2. Блок **Root Directory** → **Edit** → укажите **`web`** → Save.
+3. **Settings → Environment Variables** (Production + Preview):
 
 | Name | Value |
 |------|--------|
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://XXXX.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon key из Supabase |
 | `SUPABASE_SERVICE_ROLE_KEY` | service_role (только сервер!) |
-| `NEXT_PUBLIC_SITE_URL` | сначала `https://ваш-проект.vercel.app`, потом боевой домен |
+| `NEXT_PUBLIC_SITE_URL` | `https://mag-blush-ten.vercel.app` (потом свой домен) |
 
-6. Deploy.
+4. **Deployments** → ⋯ у последнего деплоя → **Redeploy** (или Push в `main`).
+
+Framework Preset должен стать **Next.js**. Build: `npm run build`, Install: `npm install`.
 
 ### Через CLI (опционально)
 
