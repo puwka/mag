@@ -1,5 +1,5 @@
 {
-  "name": "vitex37",
+  "name": "xbtex",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx scripts/seed.ts",
+    "rebrand": "tsx scripts/rebrand-xbtex.ts",
     "create-admin": "tsx scripts/create-admin.ts"
   },
   "dependencies": {

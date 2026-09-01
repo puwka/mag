@@ -1,31 +1,25 @@
 -- =============================================================================
 -- 202608310009_seed_minimal.sql
 -- Minimal seed: homepage section keys, default city, placeholder settings
--- (no product catalog — content import is a separate step)
 -- =============================================================================
 
 INSERT INTO public.cities (name, slug, subdomain_url, is_default, phone, address, sort_order, is_active)
 VALUES
-  ('Иваново', 'ivanovo', 'https://vitex37.ru', true, '+7 (903) 888-16-61', 'Иваново, Ярмарочная улица, 18/22', 0, true),
-  ('Санкт-Петербург', 'spb', 'https://spb.vitex37.ru', false, NULL, NULL, 1, true),
-  ('Москва', 'moscow', 'https://moscow.vitex37.ru', false, NULL, NULL, 2, true),
-  ('Екатеринбург', 'ekb', 'https://ekb.vitex37.ru', false, NULL, NULL, 3, true),
-  ('Нижний Новгород', 'nn', 'https://nn.vitex37.ru', false, NULL, NULL, 4, true),
-  ('Краснодар', 'krasnodar', 'https://krasnodar.vitex37.ru', false, NULL, NULL, 5, true)
+  ('Орск', 'orsk', 'https://xbtex.ru', true, '+7 (922) 872-00-08', 'Орск, пр. Металлистов, 3', 0, true)
 ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO public.site_settings (key, value, label, group_name, is_public) VALUES
-  ('company.name', '"ООО «ФАБРИКА ВИТЕКС»"'::jsonb, 'Название компании', 'legal', true),
-  ('company.inn', '"3700000996"'::jsonb, 'ИНН', 'legal', true),
-  ('company.address', '"Иваново, Ярмарочная улица, 18/22"'::jsonb, 'Адрес', 'contacts', true),
-  ('contacts.phones', '["+7 (903) 888-16-61", "+7 (903) 888-09-39", "+7 (4932) 39-00-29"]'::jsonb, 'Телефоны', 'contacts', true),
-  ('contacts.email', '"vitex37@mail.ru"'::jsonb, 'Email', 'contacts', true),
+  ('brand.name', '"ХБтекс"'::jsonb, 'Бренд', 'brand', true),
+  ('company.name', '"ИП Тарабанов Александр Иванович"'::jsonb, 'Название компании', 'legal', true),
+  ('company.inn', '"563501659899"'::jsonb, 'ИНН', 'legal', true),
+  ('company.address', '"Орск, пр. Металлистов, 3"'::jsonb, 'Адрес', 'contacts', true),
+  ('contacts.phones', '["+7 (922) 872-00-08"]'::jsonb, 'Телефоны', 'contacts', true),
+  ('contacts.email', '"tarabanov.aleksandr@yandex.ru"'::jsonb, 'Email', 'contacts', true),
   ('contacts.hours', '{"label":"ПН-ПТ, 09:00–17:00 (МСК)"}'::jsonb, 'Часы работы', 'contacts', true),
-  ('contacts.whatsapp', '"79290893763"'::jsonb, 'WhatsApp', 'contacts', true),
-  ('analytics.yandex_metrika_id', '"53320042"'::jsonb, 'Яндекс.Метрика', 'analytics', false),
-  ('maps.yandex_org_id', '"205409981904"'::jsonb, 'Яндекс.Организация', 'analytics', true),
-  ('social.vk', '"https://vk.com/vitex37"'::jsonb, 'VK', 'social', true),
-  ('social.youtube', '"https://www.youtube.com/channel/UC125MyNSEB_xJ9YXQeAeVGw"'::jsonb, 'YouTube', 'social', true)
+  ('contacts.whatsapp', '"79228720008"'::jsonb, 'WhatsApp', 'contacts', true),
+  ('seo.site_url', '"https://xbtex.ru"'::jsonb, 'URL сайта', 'seo', true),
+  ('social.vk', '""'::jsonb, 'VK', 'social', true),
+  ('social.youtube', '""'::jsonb, 'YouTube', 'social', true)
 ON CONFLICT (key) DO NOTHING;
 
 INSERT INTO public.homepage_sections (section_key, title, config, is_visible, sort_order) VALUES

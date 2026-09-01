@@ -153,6 +153,11 @@ async function CategoryPage({
       />
       <div className="container">
         <h1 className="page-title">{category.name}</h1>
+        {category.description ? (
+          <div className="catalog-intro prose">
+            <p>{category.description}</p>
+          </div>
+        ) : null}
         {children.length ? (
           <div className="subcats">
             {children.map((c) => (
@@ -164,17 +169,12 @@ async function CategoryPage({
         ) : null}
         <CatalogToolbar query={query} total={total} />
         <div className="catalog-layout">
-          <div>
-            <ProductGrid products={products} />
+          <div className="catalog-main">
+            <ProductGrid products={products} embedded />
             <CatalogPagination path={path} query={query} total={total} />
           </div>
           <CatalogFilters path={path} query={query} attributes={attributes} />
         </div>
-        {category.description ? (
-          <div className="prose" style={{ marginTop: 40 }}>
-            <p>{category.description}</p>
-          </div>
-        ) : null}
       </div>
     </div>
   );

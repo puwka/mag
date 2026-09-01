@@ -18,8 +18,6 @@ export function Footer({ settings, footerInfo, footerCatalog, footerGloves }: Pr
   const inn = settingString(settings, "company.inn");
   const copyright = settingString(settings, "legal.copyright");
   const disclaimer = settingString(settings, "legal.disclaimer");
-  const vk = settingString(settings, "social.vk");
-  const yt = settingString(settings, "social.youtube");
   const orgId = settingString(settings, "maps.yandex_org_id");
   const colLocation = settingString(settings, "footer.col_location", "Мы находимся");
   const colInfo = settingString(settings, "footer.col_info", "Информация");
@@ -32,8 +30,6 @@ export function Footer({ settings, footerInfo, footerCatalog, footerGloves }: Pr
   );
   const privacyUrl = settingString(settings, "footer.privacy_url", "/privacy-policy/");
   const innLabel = settingString(settings, "footer.inn_label", "ИНН");
-  const ytLabel = settingString(settings, "social.youtube_label", "YouTube");
-  const vkLabel = settingString(settings, "social.vk_label", "VK");
 
   return (
     <footer className="site-footer">
@@ -108,18 +104,6 @@ export function Footer({ settings, footerInfo, footerCatalog, footerGloves }: Pr
               <p>
                 {company} {innLabel} {inn}
               </p>
-            ) : null}
-          </div>
-          <div className="site-footer__social">
-            {yt ? (
-              <a href={yt} target="_blank" rel="noopener noreferrer">
-                {ytLabel}
-              </a>
-            ) : null}
-            {vk ? (
-              <a href={vk} target="_blank" rel="noopener noreferrer">
-                {vkLabel}
-              </a>
             ) : null}
           </div>
         </div>

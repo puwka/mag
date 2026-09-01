@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "Производитель рабочих перчаток, купить перчатки оптом"
   );
   const description = settingString(settings, "seo.home_description");
-  const brand = settingString(settings, "brand.name", "Витекс");
+  const brand = settingString(settings, "brand.name", "ХБтекс");
   const ogImage =
     mediaUrl(settingString(settings, "brand.logo"), "site") ||
     settingString(settings, "brand.logo");

@@ -7,7 +7,7 @@ export function getSiteUrl(settings?: Record<string, unknown>): string {
     const fromSettings = settingString(settings, "seo.site_url");
     if (fromSettings) return fromSettings.replace(/\/$/, "");
   }
-  return "https://vitex37.ru";
+  return "https://xbtex.ru";
 }
 
 export function absoluteUrl(

@@ -28,7 +28,7 @@ export function ProductCard({
         <h3 className="product-card__title">
           <Link href={href}>{product.name}</Link>
         </h3>
-        <div className={stock.className}>{stock.text}</div>
+        <div className={stock.className + " product-card__stock"}>{stock.text}</div>
         <div className="product-card__price">
           {formatPackPrice(product.pack_price, product.pairs_per_pack, product.price_on_request)}
         </div>

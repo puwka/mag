@@ -39,7 +39,7 @@ export function AdminShell({
       <div className="admin-shell">
         <aside className="admin-sidebar">
           <div className="admin-sidebar__brand">
-            Витекс <span>CMS</span>
+            ХБтекс <span>CMS</span>
           </div>
           <nav className="admin-nav">
             {NAV.map((item) => {

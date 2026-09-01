@@ -63,32 +63,33 @@ const IMG = {
 
 async function upsertSettings() {
   const rows = [
-    { key: "brand.name", value: "Витекс", label: "Бренд", group_name: "brand", is_public: true },
+    { key: "brand.name", value: "ХБтекс", label: "Бренд", group_name: "brand", is_public: true },
     { key: "brand.logo", value: IMG.logo, label: "Логотип", group_name: "brand", is_public: true },
     { key: "brand.logo_mobile", value: "https://vitex37.ru/wp-content/uploads/2021/09/logo-vitex-posledn-1.png", label: "Логотип mobile", group_name: "brand", is_public: true },
     { key: "brand.favicon", value: "/favicon.ico", label: "Favicon", group_name: "brand", is_public: true },
-    { key: "company.name", value: "ООО «ФАБРИКА ВИТЕКС»", label: "Компания", group_name: "legal", is_public: true },
-    { key: "company.inn", value: "3700000996", label: "ИНН", group_name: "legal", is_public: true },
-    { key: "company.address", value: "Иваново, Ярмарочная улица, 18/22", label: "Адрес", group_name: "contacts", is_public: true },
-    { key: "company.footer_blurb", value: "Фабрика производитель рабочих перчаток", label: "Футер текст", group_name: "contacts", is_public: true },
-    { key: "contacts.phones", value: ["+7 (903) 888-16-61", "+7 (903) 888-09-39"], label: "Телефоны header", group_name: "contacts", is_public: true },
-    { key: "contacts.phones_display", value: ["8 (903) 888-16-61", "8 (903) 888-09-39"], label: "Телефоны mobile", group_name: "contacts", is_public: true },
-    { key: "contacts.phones_tel", value: ["+79038881661", "+79038880939"], label: "tel:", group_name: "contacts", is_public: true },
-    { key: "contacts.sales_phones", value: ["+7 (4932) 39-00-29", "+7(902)-243-00-29", "+7 (903) 888-16-61"], label: "Телефоны футер", group_name: "contacts", is_public: true },
-    { key: "contacts.email", value: "vitex37@mail.ru", label: "Email", group_name: "contacts", is_public: true },
+    { key: "company.name", value: "ИП Тарабанов Александр Иванович", label: "Компания", group_name: "legal", is_public: true },
+    { key: "company.inn", value: "563501659899", label: "ИНН", group_name: "legal", is_public: true },
+    { key: "company.address", value: "Орск, пр. Металлистов, 3", label: "Адрес", group_name: "contacts", is_public: true },
+    { key: "company.footer_blurb", value: "Фабрика-производитель рабочих перчаток в Орске", label: "Футер текст", group_name: "contacts", is_public: true },
+    { key: "contacts.phones", value: ["+7 (922) 872-00-08"], label: "Телефоны header", group_name: "contacts", is_public: true },
+    { key: "contacts.phones_display", value: ["+7 (922) 872-00-08"], label: "Телефоны mobile", group_name: "contacts", is_public: true },
+    { key: "contacts.phones_tel", value: ["+79228720008"], label: "tel:", group_name: "contacts", is_public: true },
+    { key: "contacts.sales_phones", value: ["+7 (922) 872-00-08"], label: "Телефоны футер", group_name: "contacts", is_public: true },
+    { key: "contacts.email", value: "tarabanov.aleksandr@yandex.ru", label: "Email", group_name: "contacts", is_public: true },
     { key: "contacts.hours", value: "ПН-ПТ, 09:00–17:00 (МСК)", label: "Часы", group_name: "contacts", is_public: true },
-    { key: "contacts.whatsapp", value: "79290893763", label: "WhatsApp", group_name: "contacts", is_public: true },
+    { key: "contacts.whatsapp", value: "79228720008", label: "WhatsApp", group_name: "contacts", is_public: true },
     { key: "contacts.no_call_text", value: "Если вам не удалось дозвониться по контактным номерам компании, просим Вас написать сообщение в WhatsApp.", label: "Не дозвонились", group_name: "contacts", is_public: true },
-    { key: "maps.yandex_org_id", value: "205409981904", label: "Яндекс org", group_name: "analytics", is_public: true },
-    { key: "social.vk", value: "https://vk.com/vitex37", label: "VK", group_name: "social", is_public: true },
-    { key: "social.youtube", value: "https://www.youtube.com/channel/UC125MyNSEB_xJ9YXQeAeVGw", label: "YouTube", group_name: "social", is_public: true },
+    { key: "maps.yandex_org_id", value: "", label: "Яндекс org", group_name: "analytics", is_public: true },
+    { key: "social.vk", value: "", label: "VK", group_name: "social", is_public: true },
+    { key: "social.youtube", value: "", label: "YouTube", group_name: "social", is_public: true },
     { key: "seo.home_title", value: "Производитель рабочих перчаток, купить перчатки оптом", label: "Title главной", group_name: "seo", is_public: true },
-    { key: "seo.home_description", value: "Мы производитель рабочих перчаток компания ВИТЕКС. Решили предоставить Вам уникальную возможность купить товар напрямую с нашего производства. Выгоднее не бывает.", label: "Desc главной", group_name: "seo", is_public: true },
-    { key: "legal.copyright", value: "©2018-2026 Витекс. Все права защищены", label: "Copyright", group_name: "legal", is_public: true },
+    { key: "seo.home_description", value: "Фабрика ХБтекс в Орске — производитель рабочих перчаток. Купить перчатки оптом напрямую с производства. Доставка по России.", label: "Desc главной", group_name: "seo", is_public: true },
+    { key: "seo.site_url", value: "https://xbtex.ru", label: "URL сайта", group_name: "seo", is_public: true },
+    { key: "legal.copyright", value: "©2018-2026 ХБтекс. Все права защищены", label: "Copyright", group_name: "legal", is_public: true },
     { key: "legal.disclaimer", value: "Информация на сайте не является публичной офертой (ст. 437 ГК РФ).", label: "Дисклеймер", group_name: "legal", is_public: true },
     { key: "ui.no_call_label", value: "Не дозвонились?", label: "Кнопка не дозвонились", group_name: "ui", is_public: true },
     { key: "ui.search_label", value: "Поиск", label: "Кнопка поиска", group_name: "ui", is_public: true },
-    { key: "ui.whatsapp_message", value: "Добрый день Витекс! Не смог дозвониться...", label: "WhatsApp текст", group_name: "ui", is_public: true },
+    { key: "ui.whatsapp_message", value: "Добрый день, ХБтекс! Не смог дозвониться, прошу связаться со мной.", label: "WhatsApp текст", group_name: "ui", is_public: true },
     { key: "ui.whatsapp_send_label", value: "Отправить сообщение", label: "WhatsApp кнопка", group_name: "ui", is_public: true },
     { key: "ui.buy_label", value: "Купить", label: "Кнопка купить", group_name: "ui", is_public: true },
     { key: "ui.review_original_label", value: "Читать оригинал отзыва", label: "Ссылка отзыва", group_name: "ui", is_public: true },
@@ -114,7 +115,7 @@ async function upsertSettings() {
 
 async function seedCategories() {
   const cats: { path: string; slug: string; name: string; parent_path: string | null; image?: string; desc?: string; sort: number }[] = [
-    { path: "rabochie-perchatki", slug: "rabochie-perchatki", name: "Рабочие перчатки", parent_path: null, image: IMG.g1, desc: "Рабочие перчатки купить в Иваново недорого. Перчатки лучшего качества. Доставка транспортными компаниями.", sort: 1 },
+    { path: "rabochie-perchatki", slug: "rabochie-perchatki", name: "Рабочие перчатки", parent_path: null, image: IMG.g1, desc: "Рабочие перчатки купить в Орске недорого. Перчатки лучшего качества. Доставка транспортными компаниями.", sort: 1 },
     { path: "rabochie-perchatki/perchatki-hb", slug: "perchatki-hb", name: "Перчатки ХБ", parent_path: "rabochie-perchatki", image: IMG.hb, sort: 1 },
     { path: "rabochie-perchatki/perchatki-hb/perchatki-s-pvh", slug: "perchatki-s-pvh", name: "Перчатки с ПВХ", parent_path: "rabochie-perchatki/perchatki-hb", image: IMG.pvh, sort: 1 },
     { path: "rabochie-perchatki/perchatki-polusherstyanye-i-sherstyanye", slug: "perchatki-polusherstyanye-i-sherstyanye", name: "Перчатки полушерстяные и шерстяные", parent_path: "rabochie-perchatki", image: IMG.psh, sort: 2 },
@@ -228,7 +229,7 @@ async function seedProducts(idByPath: Map<string, string>) {
       name: p.name,
       sku: p.sku ?? null,
       short_description: `Покупка доступна от упаковки: ${p.pairs} пар`,
-      description: `<p>${p.name} — продукция фабрики «Витекс». Оптовые поставки по России.</p>`,
+      description: `<p>${p.name} — продукция фабрики «ХБтекс» в Орске. Оптовые поставки по России.</p>`,
       status: "published" as const,
       stock_status: p.stock ?? ("in_stock" as const),
       stock_label: p.label ?? (p.stock === "on_order" ? "На заказ" : "В наличии"),
@@ -311,6 +312,7 @@ async function seedProducts(idByPath: Map<string, string>) {
     if (!onRequest && p.pairs >= 500) {
       await sb.from("product_price_tiers").delete().eq("product_id", id!);
       await sb.from("product_price_tiers").insert([
+        { product_id: id!, min_pairs: p.pairs, max_pairs: 9999, price_per_pair: p.pair, sort_order: 0 },
         { product_id: id!, min_pairs: 10000, max_pairs: 30000, price_per_pair: +(p.pair - 0.2).toFixed(2), sort_order: 1 },
         { product_id: id!, min_pairs: 30000, max_pairs: null, price_per_pair: +(p.pair - 0.4).toFixed(2), sort_order: 2 },
       ]);
@@ -465,8 +467,8 @@ async function seedHomepage() {
     [
       {
         section_key: "hero",
-        title: "Перчатки оптом в Иваново",
-        subtitle: "фабрика ВИТЕКС",
+        title: "Перчатки оптом в Орске",
+        subtitle: "фабрика ХБтекс",
         config: {
           block_type: "hero",
           background: IMG.heroBg,
@@ -570,8 +572,8 @@ async function seedHomepage() {
         title: "Рабочие перчатки от производителя оптом",
         config: {
           block_type: "about",
-          html: `<p>Фабрика «Витекс» — производитель рабочих перчаток в Иваново. Собственное производство, сертифицированная продукция, оптовые цены и доставка по всей России.</p><h3>Преимущества сотрудничества с фабрикой «Витекс»</h3><ul><li>✔ Собственное производство</li><li>✔ Контроль качества материалов</li><li>✔ Широкий ассортимент</li><li>✔ Выгодные оптовые цены</li><li>✔ Стабильные поставки</li></ul><h3>Закажите рабочие перчатки оптом напрямую от производителя!</h3>`,
-          description: `<p>Фабрика «Витекс» — производитель рабочих перчаток в Иваново. Собственное производство, сертифицированная продукция, оптовые цены и доставка по всей России.</p><h3>Преимущества сотрудничества с фабрикой «Витекс»</h3><ul><li>✔ Собственное производство</li><li>✔ Контроль качества материалов</li><li>✔ Широкий ассортимент</li><li>✔ Выгодные оптовые цены</li><li>✔ Стабильные поставки</li></ul>`,
+          html: `<p>Фабрика «ХБтекс» — производитель рабочих перчаток в Орске. Собственное производство, сертифицированная продукция, оптовые цены и доставка по всей России.</p><h3>Преимущества сотрудничества с фабрикой «ХБтекс»</h3><ul><li>✔ Собственное производство</li><li>✔ Контроль качества материалов</li><li>✔ Широкий ассортимент</li><li>✔ Выгодные оптовые цены</li><li>✔ Стабильные поставки</li></ul><h3>Закажите рабочие перчатки оптом напрямую от производителя!</h3>`,
+          description: `<p>Фабрика «ХБтекс» — производитель рабочих перчаток в Орске. Собственное производство, сертифицированная продукция, оптовые цены и доставка по всей России.</p><h3>Преимущества сотрудничества с фабрикой «ХБтекс»</h3><ul><li>✔ Собственное производство</li><li>✔ Контроль качества материалов</li><li>✔ Широкий ассортимент</li><li>✔ Выгодные оптовые цены</li><li>✔ Стабильные поставки</li></ul>`,
           button_label: "О компании",
           button_url: "/o-kompanii-viteks/",
         },
@@ -611,7 +613,7 @@ async function seedHomepage() {
   await sb.from("homepage_benefits").delete().neq("id", "00000000-0000-0000-0000-000000000000");
   await sb.from("homepage_benefits").insert([
     { block_group: "info_boxes", title: "Оперативная доставка по России", description: null, icon_path: IMG.dostavka, sort_order: 1, is_visible: true },
-    { block_group: "info_boxes", title: "Купить перчатки в Иваново на складе производства", description: null, icon_path: IMG.telezhka, sort_order: 2, is_visible: true },
+    { block_group: "info_boxes", title: "Купить перчатки в Орске на складе производства", description: null, icon_path: IMG.telezhka, sort_order: 2, is_visible: true },
     { block_group: "info_boxes", title: "ХБ перчатки сертифицированы", description: null, icon_path: IMG.sert, sort_order: 3, is_visible: true },
     { block_group: "info_boxes", title: "Компания 5 лет на рынке", description: null, icon_path: IMG.years, sort_order: 4, is_visible: true },
     { block_group: "advantages", title: "Новинки перчаток", description: "Каталог перчаток регулярно расширяется и пополняется", sort_order: 1, is_visible: true },
@@ -657,12 +659,12 @@ async function seedReviews() {
 
 async function seedPages() {
   const pages = [
-    { slug: "contact", title: "Контакты", template: "contact", html: `<p>Производство: Россия, Ивановская обл., Иваново, Ярмарочная ул., 18/22, 153021</p><p>Режим: ПН–ПТ, 09:00–17:00 (МСК)</p>` },
-    { slug: "dostavka", title: "Доставка", template: "default", html: `<p>Доставка транспортными компаниями по всей территории России. Возможен самовывоз со склада производства в Иваново.</p>` },
+    { slug: "contact", title: "Контакты", template: "contact", html: `<p>Производство: Россия, Орск, пр. Металлистов, 3</p><p>Телефон: +7 (922) 872-00-08</p><p>Email: tarabanov.aleksandr@yandex.ru</p><p>Режим: ПН–ПТ, 09:00–17:00 (МСК)</p>` },
+    { slug: "dostavka", title: "Доставка", template: "default", html: `<p>Доставка транспортными компаниями по всей территории России. Возможен самовывоз со склада производства в Орске.</p>` },
     { slug: "oplata", title: "Оплата", template: "default", html: `<p>Оплата по безналичному расчёту для юридических лиц и ИП. Реквизиты ООО «ФАБРИКА ВИТЕКС» ИНН 3700000996 предоставляются при оформлении заказа.</p>` },
     { slug: "prajs-list", title: "Отправить запрос на прайс-лист", template: "price_list", html: `<p>Ознакомьтесь с ценами на нашу продукцию. Специальные предложения на рабочие перчатки.</p>` },
-    { slug: "o-kompanii-viteks", title: "О компании Витекс", template: "about", html: `<p>Надёжный поставщик рабочих перчаток. Широкий ассортимент ХБ перчаток, нанесение логотипов, контроль качества от закупки пряжи. Производство в Иваново.</p>` },
-    { slug: "nanesenie-logotipa", title: "Нанесение логотипа на ХБ перчатки в Иваново", template: "logo", html: `<p>Нанесение логотипа шелкографией и термотрансфером на рабочие перчатки.</p>` },
+    { slug: "o-kompanii-viteks", title: "О компании ХБтекс", template: "about", html: `<p>Надёжный поставщик рабочих перчаток. Широкий ассортимент ХБ перчаток, нанесение логотипов, контроль качества от закупки пряжи. Производство в Орске.</p>` },
+    { slug: "nanesenie-logotipa", title: "Нанесение логотипа на ХБ перчатки в Орске", template: "logo", html: `<p>Нанесение логотипа шелкографией и термотрансфером на рабочие перчатки.</p>` },
     { slug: "optovym-pokupatelyam", title: "Предлагаем выгодное сотрудничество оптовым покупателям", template: "partnership", html: `<p>Работаем с оптовыми покупателями напрямую с производства.</p>` },
     { slug: "optovym-pokupatelyam/otdel-zakupki", title: "Отдел закупки", template: "default", html: `<p>Закупка сырья для производства. Свяжитесь с нами по контактам на сайте.</p>` },
     { slug: "privacy-policy", title: "Политика обработки персональных данных", template: "default", html: `<p>Мы обрабатываем персональные данные в соответствии с законодательством РФ. Сайт использует cookie, Яндекс.Метрику и Google reCAPTCHA.</p>` },
@@ -740,7 +742,7 @@ async function seedMenus(idByPath: Map<string, string>) {
   await add(rootId, "Контакты", "/contact/", "header_mega", 6);
   await add(rootId, "Доставка", "/dostavka/", "header_mega", 7);
   await add(rootId, "Оплата", "/oplata/", "header_mega", 8);
-  await add(rootId, "О компании Витекс", "/o-kompanii-viteks/", "header_mega", 9);
+  await add(rootId, "О компании ХБтекс", "/o-kompanii-viteks/", "header_mega", 9);
 
   // quick links
   await add(null, "ХБ перчатки", "/rabochie-perchatki/perchatki-hb/", "header_quick", 1);

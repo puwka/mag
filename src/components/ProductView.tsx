@@ -238,7 +238,7 @@ export function ProductView({
                           <tr key={t.id}>
                             <th>
                               {t.min_pairs}
-                              {t.max_pairs ? `–${t.max_pairs}` : "+"} пар
+                              {t.max_pairs != null ? `–${t.max_pairs}` : "+"} пар
                             </th>
                             <td>{t.price_per_pair} ₽ / пара</td>
                           </tr>

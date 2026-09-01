@@ -1,7 +1,7 @@
 import { requireStaff } from "@/lib/auth";
 import { AdminShell } from "@/components/admin/AdminShell";
 
-export const metadata = { title: "CMS — Витекс" };
+export const metadata = { title: "CMS — ХБтекс" };
 
 export default async function AdminPanelLayout({
   children,

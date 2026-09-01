@@ -25,13 +25,15 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
   const footerGloves = (await getMenusByKeys(["footer_gloves"])).filter((i) => !i.parent_id);
 
   const siteUrl = getSiteUrl(settings);
-  const brand = settingString(settings, "brand.name", "Витекс");
+  const brand = settingString(settings, "brand.name", "ХБтекс");
   const logo =
     mediaUrl(settingString(settings, "brand.logo"), "site") ||
     settingString(settings, "brand.logo");
   const phone = settingArray(settings, "contacts.phones")[0] || "";
   const email = settingString(settings, "contacts.email");
   const address = settingString(settings, "company.address");
+  const cityMatch = address.match(/^(?:г\.\s*)?([^,]+)/);
+  const city = cityMatch?.[1]?.trim() || "Орск";
 
   const orgLd = {
     "@context": "https://schema.org",
@@ -46,15 +48,11 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
       ? {
           "@type": "PostalAddress",
           streetAddress: address,
-          addressLocality: "Иваново",
+          addressLocality: city,
           addressCountry: "RU",
         }
       : undefined,
     openingHours: settingString(settings, "contacts.hours") || undefined,
-    sameAs: [
-      settingString(settings, "social.vk"),
-      settingString(settings, "social.youtube"),
-    ].filter(Boolean),
   };
 
   return (
@@ -76,7 +74,7 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
         whatsappMessage={settingString(
           settings,
           "ui.whatsapp_message",
-          "Добрый день Витекс! Не смог дозвониться..."
+          "Добрый день, ХБтекс! Не смог дозвониться, прошу связаться со мной."
         )}
         whatsappSendLabel={settingString(
           settings,

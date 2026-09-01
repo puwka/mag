@@ -13,7 +13,7 @@ export async function getProductSiteContext() {
   const deliveryPage = await getPageBySlug("dostavka");
   return {
     siteUrl: getSiteUrl(settings),
-    brand: settingString(settings, "brand.name", "Витекс"),
+    brand: settingString(settings, "brand.name", "ХБтекс"),
     phoneDisplay: phones[0] || "",
     phoneTel: tels[0] || phones[0]?.replace(/[^\d+]/g, "") || "",
     deliveryHtml:
