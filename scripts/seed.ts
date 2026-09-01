@@ -66,7 +66,7 @@ async function upsertSettings() {
     { key: "brand.name", value: "ХБтекс", label: "Бренд", group_name: "brand", is_public: true },
     { key: "brand.logo", value: IMG.logo, label: "Логотип", group_name: "brand", is_public: true },
     { key: "brand.logo_mobile", value: "https://vitex37.ru/wp-content/uploads/2021/09/logo-vitex-posledn-1.png", label: "Логотип mobile", group_name: "brand", is_public: true },
-    { key: "brand.favicon", value: "/favicon.ico", label: "Favicon", group_name: "brand", is_public: true },
+    { key: "brand.favicon", value: "/icons/glove-hand.svg", label: "Favicon", group_name: "brand", is_public: true },
     { key: "company.name", value: "ИП Тарабанов Александр Иванович", label: "Компания", group_name: "legal", is_public: true },
     { key: "company.inn", value: "563501659899", label: "ИНН", group_name: "legal", is_public: true },
     { key: "company.address", value: "Орск, пр. Металлистов, 3", label: "Адрес", group_name: "contacts", is_public: true },
