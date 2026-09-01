@@ -85,6 +85,10 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
           "ui.whatsapp_send_label",
           "Отправить сообщение"
         )}
+        telegram={settingString(settings, "contacts.telegram")}
+        max={settingString(settings, "contacts.max")}
+        telegramLabel={settingString(settings, "contacts.telegram_label", "Telegram")}
+        maxLabel={settingString(settings, "contacts.max_label", "MAX")}
         searchLabel={settingString(settings, "ui.search_label", "Поиск")}
         citySelectLabel={settingString(settings, "ui.city_select_label", "Выберите город")}
         cities={cities}

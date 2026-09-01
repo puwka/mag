@@ -12,6 +12,7 @@ import { MobileMenu } from "./MobileMenu";
 import { Search } from "./Search";
 import { Cart, CartButton } from "./Cart";
 import { menuHref } from "@/lib/links";
+import { HeaderMessengers } from "./MessengerIcons";
 
 type Props = {
   logo: string;
@@ -27,6 +28,10 @@ type Props = {
   whatsapp: string;
   whatsappMessage: string;
   whatsappSendLabel: string;
+  telegram: string;
+  max: string;
+  telegramLabel: string;
+  maxLabel: string;
   searchLabel: string;
   citySelectLabel: string;
   cities: City[];
@@ -94,6 +99,12 @@ export function Header(props: Props) {
               ))}
               <a href={`mailto:${props.email}`}>{props.email}</a>
             </div>
+            <HeaderMessengers
+              telegram={props.telegram}
+              max={props.max}
+              telegramLabel={props.telegramLabel}
+              maxLabel={props.maxLabel}
+            />
             <div className="header-tools header-tools--mobile">
               <CartButton />
               <button
