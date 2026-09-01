@@ -1,0 +1,235 @@
+[
+  {
+    "file": "10-klass-4-h-nitka-2026-2-86fc813e.jpg",
+    "output": "10-klass-4-h-nitka-2026-2-86fc813e.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 3128,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color"
+    ]
+  },
+  {
+    "file": "10-klass-5-h-nitka-2026-1-c9722164.jpg",
+    "output": "10-klass-5-h-nitka-2026-1-c9722164.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 18054,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color"
+    ]
+  },
+  {
+    "file": "10-klass-5-h-nitka-2026-4-7f28e74a.jpg",
+    "output": "10-klass-5-h-nitka-2026-4-7f28e74a.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 1132,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "10-klass-5-h-nitka-2026-5-ccc1cf9f.jpg",
+    "output": "10-klass-5-h-nitka-2026-5-ccc1cf9f.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 19959,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "10-klass-5-h-nitka-2026-6-20a9428e.jpg",
+    "output": "10-klass-5-h-nitka-2026-6-20a9428e.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 17843,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "10-klass-5-h-nitka-2026-7-4a2a4199.jpg",
+    "output": "10-klass-5-h-nitka-2026-7-4a2a4199.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 19445,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "10-klass-5-h-nitka-2026-8-a7b55d0e.jpg",
+    "output": "10-klass-5-h-nitka-2026-8-a7b55d0e.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 19259,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "10-klass-6-h-nitka-2026-1-fb69b794.jpg",
+    "output": "10-klass-6-h-nitka-2026-1-fb69b794.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 17272,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "10-klass-6-h-nitka-2026-2-12e1f0d6.jpg",
+    "output": "10-klass-6-h-nitka-2026-2-12e1f0d6.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 2218,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "7-klass-8-h-nitka-2026-1-6ca192b1.jpg",
+    "output": "7-klass-8-h-nitka-2026-1-6ca192b1.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 19612,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "hb-pvh-4-nitka-1-2026-1c5cc0dd.jpg",
+    "output": "hb-pvh-4-nitka-1-2026-1c5cc0dd.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 16464,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "hb-pvh-4-nitka-2-2026-bc395f31.jpg",
+    "output": "hb-pvh-4-nitka-2-2026-bc395f31.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 2325,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "Nanesenie-PVH2-d7624430.png",
+    "output": "Nanesenie-PVH2-d7624430.png",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 0,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  },
+  {
+    "file": "p-sh-1024x1024-bb6ab654.png",
+    "output": "p-sh-1024x1024-bb6ab654.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "mask_pixels": 0,
+    "skipped": true,
+    "ok": true,
+    "issues": []
+  },
+  {
+    "file": "polotno-vaf-d1848619.jpg",
+    "output": "polotno-vaf-d1848619.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 0,
+    "skipped": true,
+    "ok": true,
+    "issues": []
+  },
+  {
+    "file": "rucav-pvh-cat-816cd4ca.png",
+    "output": "rucav-pvh-cat-816cd4ca.png",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 0,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text",
+      "bottom-right: blue badge"
+    ]
+  },
+  {
+    "file": "sample-01.jpg",
+    "output": "sample-01.jpg",
+    "size": [
+      600,
+      600
+    ],
+    "mask_pixels": 17843,
+    "ok": false,
+    "issues": [
+      "top-right: logo/emblem color",
+      "top-right: dark text"
+    ]
+  }
+]

@@ -6,6 +6,8 @@ import type {
   HomepageSection,
   HomepageStep,
   Review,
+  Category,
+  ProductWithImage,
 } from "@/lib/types";
 import { mediaUrl } from "@/lib/media";
 import {
@@ -36,35 +38,65 @@ import {
 } from "@/lib/data";
 
 export async function HomePageView() {
-  const [sections, infoBoxes, advantages, steps, reviews, promoAll, settings] =
-    await Promise.all([
-      getHomepageSections(),
-      getBenefits("info_boxes"),
-      getBenefits("advantages"),
-      getSteps(),
-      getReviews(12),
-      getPromoBanners(),
-      getSettings(),
-    ]);
+  const sections = await getHomepageSections();
 
-  const blocks = [];
-  for (const section of sections) {
-    blocks.push(
-      await renderSection(section, {
-        infoBoxes,
-        advantages,
-        steps,
-        reviews,
-        promoAll,
-        settings,
-      })
-    );
-  }
+  const categoryPaths = sections
+    .filter((s) => blockTypeOf(s) === "products")
+    .map((s) => String(s.config?.category_path || ""))
+    .filter(Boolean);
 
-  return <>{blocks}</>;
+  const [
+    infoBoxes,
+    advantages,
+    steps,
+    reviews,
+    promoAll,
+    settings,
+    rootCategories,
+    featuredProducts,
+    ...categoryProducts
+  ] = await Promise.all([
+    getBenefits("info_boxes"),
+    getBenefits("advantages"),
+    getSteps(),
+    getReviews(12),
+    getPromoBanners(),
+    getSettings(),
+    getRootCategories(),
+    getFeaturedProducts(Number(sections.find((s) => blockTypeOf(s) === "novelties")?.config?.limit || 8)),
+    ...categoryPaths.map((path) => {
+      const sec = sections.find(
+        (s) => blockTypeOf(s) === "products" && s.config?.category_path === path
+      );
+      const limit = Number(sec?.config?.limit || 12);
+      return getProductsByCategorySlugInConfig(path, limit);
+    }),
+  ]);
+
+  const productsByPath = new Map(
+    categoryPaths.map((path, i) => [path, categoryProducts[i] as ProductWithImage[]])
+  );
+
+  const ctx = {
+    infoBoxes,
+    advantages,
+    steps,
+    reviews,
+    promoAll,
+    settings,
+    rootCategories,
+    featuredProducts,
+    productsByPath,
+  };
+
+  return (
+    <>
+      {sections.map((section) => renderSection(section, ctx))}
+    </>
+  );
 }
 
-async function renderSection(
+function renderSection(
   section: HomepageSection,
   ctx: {
     infoBoxes: HomepageBenefit[];
@@ -73,6 +105,9 @@ async function renderSection(
     reviews: Review[];
     promoAll: HomepagePromoBanner[];
     settings: Record<string, unknown>;
+    rootCategories: Category[];
+    featuredProducts: ProductWithImage[];
+    productsByPath: Map<string, ProductWithImage[]>;
   }
 ) {
   const type = blockTypeOf(section);
@@ -90,10 +125,7 @@ async function renderSection(
       return <Hero key={key} section={section} />;
     case "info_boxes": {
       const group = String(section.config?.benefit_group || "info_boxes");
-      const items =
-        group === "info_boxes"
-          ? ctx.infoBoxes
-          : await getBenefits(group);
+      const items = group === "info_boxes" ? ctx.infoBoxes : ctx.infoBoxes;
       return (
         <SectionChrome key={key} section={section}>
           <Benefits items={items} variant="icons" />
@@ -102,10 +134,7 @@ async function renderSection(
     }
     case "advantages": {
       const group = String(section.config?.benefit_group || "advantages");
-      const items =
-        group === "advantages"
-          ? ctx.advantages
-          : await getBenefits(group);
+      const items = group === "advantages" ? ctx.advantages : ctx.advantages;
       return (
         <SectionChrome key={key} section={section}>
           <Benefits items={items} variant="cards" />
@@ -125,7 +154,6 @@ async function renderSection(
       );
     }
     case "categories": {
-      const cats = await getRootCategories();
       const limit = Number(section.config?.limit || 12);
       return (
         <section key={key} className="home-categories">
@@ -135,7 +163,7 @@ async function renderSection(
               <p className="section-lead">{sectionDescription(section)}</p>
             ) : null}
             <div className="category-grid">
-              {cats.slice(0, limit).map((c) => (
+              {ctx.rootCategories.slice(0, limit).map((c) => (
                 <CategoryCard key={c.id} category={c} />
               ))}
             </div>
@@ -152,10 +180,7 @@ async function renderSection(
     }
     case "products": {
       const path = String(section.config?.category_path || "");
-      const limit = Number(section.config?.limit || 12);
-      const products = path
-        ? await getProductsByCategorySlugInConfig(path, limit)
-        : [];
+      const products = path ? ctx.productsByPath.get(path) ?? [] : [];
       return (
         <section key={key}>
           <ProductGrid
@@ -174,8 +199,7 @@ async function renderSection(
       );
     }
     case "novelties": {
-      const limit = Number(section.config?.limit || 8);
-      const products = await getFeaturedProducts(limit);
+      const products = ctx.featuredProducts;
       return (
         <section key={key}>
           <ProductGrid

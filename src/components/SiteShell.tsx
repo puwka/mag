@@ -1,8 +1,7 @@
 import {
   getCities,
-  getMenusByKeys,
-  getMenuTree,
   getSettings,
+  getStorefrontMenus,
   settingArray,
   settingString,
 } from "@/lib/data";
@@ -15,14 +14,19 @@ import { getSiteUrl } from "@/lib/site";
 import { mediaUrl } from "@/lib/media";
 
 export async function SiteShell({ children }: { children: React.ReactNode }) {
-  const settings = await getSettings();
-  const cities = await getCities();
-  const megaMenu = await getMenuTree("header_mega");
-  const quickLinks = (await getMenusByKeys(["header_quick"])).filter((i) => !i.parent_id);
-  const mobileMenu = await getMenuTree("mobile");
-  const footerInfo = (await getMenusByKeys(["footer_info"])).filter((i) => !i.parent_id);
-  const footerCatalog = (await getMenusByKeys(["footer_catalog"])).filter((i) => !i.parent_id);
-  const footerGloves = (await getMenusByKeys(["footer_gloves"])).filter((i) => !i.parent_id);
+  const [settings, cities, menus] = await Promise.all([
+    getSettings(),
+    getCities(),
+    getStorefrontMenus(),
+  ]);
+  const {
+    megaMenu,
+    quickLinks,
+    mobileMenu,
+    footerInfo,
+    footerCatalog,
+    footerGloves,
+  } = menus;
 
   const siteUrl = getSiteUrl(settings);
   const brand = settingString(settings, "brand.name", "ХБтекс");

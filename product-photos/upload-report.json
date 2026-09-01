@@ -1,0 +1,153 @@
+{
+  "uploaded_at": "2026-09-01T12:34:12.726Z",
+  "bucket": "products",
+  "results": [
+    {
+      "slug": "vafelnoe-polotno-80-sm-otbelennoe-pl-140-g-m",
+      "role": "primary",
+      "from": "vafelnoe-polotno-80-sm-otbelennoe-pl-140-g-m__primary__вафельное-полотно-80-см-отбеленное-пл-140-г-м.jpg",
+      "path": "catalog/vafelnoe-polotno-80-sm-otbelennoe-pl-140-g-m.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-8-nitka-h-b",
+      "role": "primary",
+      "from": "perchatki-rabochie-8-nitka-h-b__primary__перчатки-хб-8н-7-5-класс.jpg",
+      "path": "catalog/perchatki-rabochie-8-nitka-h-b.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-h-b-6-nitka-10-kl-belyj",
+      "role": "primary",
+      "from": "perchatki-rabochie-h-b-6-nitka-10-kl-belyj__primary__перчатки-хб-6-10-белый.jpg",
+      "path": "catalog/perchatki-rabochie-h-b-6-nitka-10-kl-belyj.jpg",
+      "ok": true
+    },
+    {
+      "slug": "rukavicy-brezentovye-pl-400gr",
+      "role": "primary",
+      "from": "rukavicy-brezentovye-pl-400gr__primary__рукавицы-брезентовые-пл-400гр.png",
+      "path": "catalog/rukavicy-brezentovye-pl-400gr.png",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-h-b-berezka",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-h-b-berezka__primary__перчатки-хб-5-10-березка.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-h-b-berezka.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-s-pvh-volna-belyj",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-s-pvh-volna-belyj__primary__перчатки-5н-с-пвх-волна-белый.png",
+      "path": "catalog/perchatki-rabochie-5-nitka-s-pvh-volna-belyj.png",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-s-pvh-kirpich-chjornyj",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-s-pvh-kirpich-chjornyj__primary__перчатки-5н-с-пвх-кирпич-чёрный.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-s-pvh-kirpich-chjornyj.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-belye-s-pvh-tochka",
+      "role": "primary",
+      "from": "perchatki-belye-s-pvh-tochka__primary__перчатки-4н-белые-хб-с-пвх-точка.jpg",
+      "path": "catalog/perchatki-belye-s-pvh-tochka.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-belye-s-pvh-tochka",
+      "role": "gallery-1",
+      "from": "perchatki-rabochie-5-nitka-s-pvh-volna-belyj__primary__перчатки-5н-с-пвх-волна-белый.png",
+      "path": "catalog/perchatki-belye-s-pvh-tochka-gallery-1.png",
+      "ok": true
+    },
+    {
+      "slug": "polusherstyanye-perchatki-standart",
+      "role": "primary",
+      "from": "polusherstyanye-perchatki-standart__primary__перчатки-полушерстяные-стандарт.png",
+      "path": "catalog/polusherstyanye-perchatki-standart.png",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-hb-grafit-seriya-lajt",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-hb-grafit-seriya-lajt__primary__перчатки-хб-5-10-графит.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-hb-grafit-seriya-lajt.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-4n-grafit-tochka",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-hb-grafit-seriya-lajt__primary__перчатки-хб-5-10-графит.jpg",
+      "path": "catalog/perchatki-4n-grafit-tochka.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-hb-chjornaya-seriya-lajt",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-hb-chjornaya-seriya-lajt__primary__перчатки-хб-5-10-черная.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-hb-chjornaya-seriya-lajt.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-s-pvh-tochka",
+      "role": "primary",
+      "from": "perchatki-belye-s-pvh-tochka__primary__перчатки-4н-белые-хб-с-пвх-точка.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-s-pvh-tochka.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-h-b-grafit",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-h-b-grafit__primary__перчатки-хб-5н-цвет-серый.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-h-b-grafit.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-h-b",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-h-b__primary__перчатки-х-б-5-10-стандарт.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-h-b.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-3-nitka-h-b",
+      "role": "primary",
+      "from": "perchatki-rabochie-3-nitka-h-b__primary__перчатки-хб-3-10.jpg",
+      "path": "catalog/perchatki-rabochie-3-nitka-h-b.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-4-nitka-h-b",
+      "role": "primary",
+      "from": "perchatki-rabochie-3-nitka-h-b__primary__перчатки-хб-3-10.jpg",
+      "path": "catalog/perchatki-rabochie-4-nitka-h-b.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-4-nitka-h-b",
+      "role": "gallery-1",
+      "from": "perchatki-rabochie-5-nitka-s-pvh-volna-belyj__primary__перчатки-5н-с-пвх-волна-белый.png",
+      "path": "catalog/perchatki-rabochie-4-nitka-h-b-gallery-1.png",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-h-b-6-nitka-standart-10kl",
+      "role": "primary",
+      "from": "perchatki-h-b-6-nitka-standart-10kl__primary__перчатки-хб-6-10-черная.jpg",
+      "path": "catalog/perchatki-h-b-6-nitka-standart-10kl.jpg",
+      "ok": true
+    },
+    {
+      "slug": "perchatki-rabochie-5-nitka-hb-seriya-lajt",
+      "role": "primary",
+      "from": "perchatki-rabochie-5-nitka-hb-seriya-lajt__primary__перчатки-хб-10-5-белая.jpg",
+      "path": "catalog/perchatki-rabochie-5-nitka-hb-seriya-lajt.jpg",
+      "ok": true
+    }
+  ]
+}

@@ -1,4 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
+import { cache } from "react";
+import { getPublicSupabase } from "@/lib/supabase/public";
 import type {
   Attribute,
   AttributeValue,
@@ -22,8 +23,8 @@ import type {
   SiteSetting,
 } from "@/lib/types";
 
-export async function getSettings(): Promise<Record<string, unknown>> {
-  const supabase = await createClient();
+export const getSettings = cache(async (): Promise<Record<string, unknown>> => {
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("site_settings")
     .select("key, value")
@@ -33,10 +34,10 @@ export async function getSettings(): Promise<Record<string, unknown>> {
     map[row.key] = row.value;
   });
   return map;
-}
+});
 
 export async function getCities(): Promise<City[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("cities")
     .select("*")
@@ -46,7 +47,7 @@ export async function getCities(): Promise<City[]> {
 }
 
 export async function getMenuTree(menuKey?: string): Promise<MenuItem[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   let q = supabase
     .from("menu_items")
     .select("*")
@@ -59,7 +60,7 @@ export async function getMenuTree(menuKey?: string): Promise<MenuItem[]> {
 }
 
 export async function getMenusByKeys(keys: string[]): Promise<MenuItem[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("menu_items")
     .select("*")
@@ -68,6 +69,28 @@ export async function getMenusByKeys(keys: string[]): Promise<MenuItem[]> {
     .order("sort_order");
   return (data as MenuItem[]) ?? [];
 }
+
+/** One query for header/footer/mobile menus (instead of 5+ separate calls). */
+export const getStorefrontMenus = cache(async () => {
+  const keys = [
+    "header_mega",
+    "header_quick",
+    "mobile",
+    "footer_info",
+    "footer_catalog",
+    "footer_gloves",
+  ];
+  const items = await getMenusByKeys(keys);
+  const byKey = (k: string) => items.filter((i) => i.menu_key === k);
+  return {
+    megaMenu: buildTree(byKey("header_mega")),
+    quickLinks: byKey("header_quick").filter((i) => !i.parent_id),
+    mobileMenu: buildTree(byKey("mobile")),
+    footerInfo: byKey("footer_info").filter((i) => !i.parent_id),
+    footerCatalog: byKey("footer_catalog").filter((i) => !i.parent_id),
+    footerGloves: byKey("footer_gloves").filter((i) => !i.parent_id),
+  };
+});
 
 function buildTree(items: MenuItem[]): MenuItem[] {
   const map = new Map<string, MenuItem>();
@@ -84,7 +107,7 @@ function buildTree(items: MenuItem[]): MenuItem[] {
 }
 
 export async function getHomepageSections(): Promise<HomepageSection[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("homepage_sections")
     .select("*")
@@ -94,7 +117,7 @@ export async function getHomepageSections(): Promise<HomepageSection[]> {
 }
 
 export async function getBenefits(group?: string): Promise<HomepageBenefit[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   let q = supabase
     .from("homepage_benefits")
     .select("*")
@@ -106,7 +129,7 @@ export async function getBenefits(group?: string): Promise<HomepageBenefit[]> {
 }
 
 export async function getSteps(): Promise<HomepageStep[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("homepage_steps")
     .select("*")
@@ -118,7 +141,7 @@ export async function getSteps(): Promise<HomepageStep[]> {
 export async function getPromoBanners(
   rowIndex?: number
 ): Promise<HomepagePromoBanner[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   let q = supabase
     .from("homepage_promo_banners")
     .select("*")
@@ -130,7 +153,7 @@ export async function getPromoBanners(
 }
 
 export async function getReviews(limit = 8): Promise<Review[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("reviews")
     .select("*")
@@ -141,7 +164,7 @@ export async function getReviews(limit = 8): Promise<Review[]> {
 }
 
 export async function getPageBySlug(slug: string): Promise<Page | null> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("pages")
     .select("*")
@@ -152,7 +175,7 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
 }
 
 export async function getCategoryByPath(path: string): Promise<Category | null> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("categories")
     .select("*")
@@ -165,7 +188,7 @@ export async function getCategoryByPath(path: string): Promise<Category | null> 
 export async function getCategoryChildren(
   parentId: string
 ): Promise<Category[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("categories")
     .select("*")
@@ -178,7 +201,7 @@ export async function getCategoryChildren(
 export async function getFeaturedProducts(
   limit = 8
 ): Promise<ProductWithImage[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("products")
     .select("*")
@@ -190,7 +213,7 @@ export async function getFeaturedProducts(
 }
 
 export async function getRootCategories(): Promise<Category[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("categories")
     .select("*")
@@ -204,7 +227,7 @@ async function attachPrimaryImages(
   products: Product[]
 ): Promise<ProductWithImage[]> {
   if (!products.length) return [];
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const ids = products.map((p) => p.id);
   const { data: images } = await supabase
     .from("product_images")
@@ -229,7 +252,7 @@ async function attachPrimaryImages(
 }
 
 async function productIdsInCategoryTree(path: string): Promise<string[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const category = await getCategoryByPath(path);
   if (!category) return [];
 
@@ -261,7 +284,7 @@ async function filterProductIdsByAttributes(
   filters: Record<string, string[]>
 ): Promise<string[]> {
   if (!Object.keys(filters).length) return productIds;
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   let current = new Set(productIds);
 
   for (const [attrSlug, valueSlugs] of Object.entries(filters)) {
@@ -304,7 +327,7 @@ export async function getProductsByCategoryPath(
   path: string,
   opts: Partial<CatalogQuery> & { limit?: number; offset?: number } = {}
 ): Promise<{ products: ProductWithImage[]; total: number }> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   let productIds = await productIdsInCategoryTree(path);
   if (!productIds.length) return { products: [], total: 0 };
 
@@ -344,7 +367,7 @@ export async function getProductsByCategoryPath(
 export async function getFilterableAttributes(
   categoryPath: string
 ): Promise<FilterAttribute[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const productIds = await productIdsInCategoryTree(categoryPath);
   if (!productIds.length) return [];
 
@@ -398,7 +421,7 @@ export async function getFilterableAttributes(
 export async function getProductAttributes(
   productId: string
 ): Promise<ProductAttributeRow[]> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data: pav } = await supabase
     .from("product_attribute_values")
     .select("attribute_value_id")
@@ -456,7 +479,7 @@ export async function getProductsByCategorySlugInConfig(
 export async function getProductBySlug(
   slug: string
 ): Promise<ProductWithImage | null> {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("products")
     .select("*")
@@ -486,7 +509,7 @@ export async function getProductBySlug(
 }
 
 export async function getProductExtras(productId: string) {
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const [tiers, docs, related, attributes] = await Promise.all([
     supabase
       .from("product_price_tiers")
@@ -534,7 +557,7 @@ export async function searchProducts(
   limit = 20
 ): Promise<ProductWithImage[]> {
   if (!query || query.trim().length < 2) return [];
-  const supabase = await createClient();
+  const supabase = getPublicSupabase();
   const { data } = await supabase
     .from("products")
     .select("*")
