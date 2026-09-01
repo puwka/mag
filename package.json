@@ -17,7 +17,9 @@
     "images:verify": "python scripts/clean-product-images.py --verify-only",
     "images:pipeline": "tsx scripts/download-product-images.ts && python scripts/clean-product-images.py",
     "images:export": "tsx scripts/export-product-photos.ts",
+    "images:export-original": "tsx scripts/export-original-product-photos.ts",
     "images:upload": "tsx scripts/upload-product-photos.ts",
+    "images:upload-original": "tsx scripts/upload-product-photos.ts --original",
     "create-admin": "tsx scripts/create-admin.ts"
   },
   "dependencies": {

@@ -3,6 +3,8 @@
  * Resolves vitex URLs via product-photos/manifest.json and slug-matched files.
  *
  * Usage: npx tsx scripts/upload-product-photos.ts
+ *        npx tsx scripts/upload-product-photos.ts --original
+ *        PRODUCT_PHOTOS_DIR=product-photos-original npx tsx scripts/upload-product-photos.ts
  */
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync, existsSync, writeFileSync, readdirSync } from "fs";
@@ -42,7 +44,13 @@ if (!url || !key) {
 const sb = createClient(url, key, { auth: { persistSession: false } });
 
 const ROOT = process.cwd();
-const PHOTOS = resolve(ROOT, "product-photos");
+const useOriginal =
+  process.argv.includes("--original") ||
+  process.env.PRODUCT_PHOTOS_DIR === "product-photos-original";
+const PHOTOS = resolve(
+  ROOT,
+  process.env.PRODUCT_PHOTOS_DIR ?? (useOriginal ? "product-photos-original" : "product-photos")
+);
 const PHOTOS_MANIFEST = resolve(PHOTOS, "manifest.json");
 const ORIGINAL_MANIFEST = resolve(ROOT, "original", "manifest.json");
 const CLEAN = resolve(ROOT, "clean");
@@ -154,6 +162,9 @@ function resolveLocalFile(
   sortOrder: number,
   urlToLocal: Map<string, string>
 ): string | null {
+  const fromDir = findPhotoBySlug(slug, isPrimary, sortOrder);
+  if (fromDir) return fromDir;
+
   const seed = SEED_IMAGES[slug];
   const seedUrl = isPrimary
     ? seed?.primary
@@ -172,21 +183,31 @@ function resolveLocalFile(
   }
 
   if (storagePath.startsWith("catalog/")) {
-    const bySlug = findPhotoBySlug(slug);
+    const bySlug = findPhotoBySlug(slug, isPrimary, sortOrder);
     if (bySlug) return bySlug;
     if (seedUrl) {
       return urlToLocal.get(seedUrl) ?? urlToLocal.get(seedUrl.split("?")[0]) ?? null;
     }
   }
 
-  return findPhotoBySlug(slug);
+  return findPhotoBySlug(slug, isPrimary, sortOrder);
 }
 
-function findPhotoBySlug(slug: string): string | null {
+function findPhotoBySlug(
+  slug: string,
+  isPrimary?: boolean,
+  sortOrder?: number
+): string | null {
   if (!existsSync(PHOTOS)) return null;
-  const match = readdirSync(PHOTOS).find(
-    (f) => f.startsWith(`${slug}__`) && !f.endsWith(".json")
-  );
+  const files = readdirSync(PHOTOS).filter((f) => !f.endsWith(".json"));
+
+  if (isPrimary !== undefined && sortOrder !== undefined) {
+    const role = isPrimary ? "primary" : `gallery-${sortOrder}`;
+    const exact = files.find((f) => f.startsWith(`${slug}__${role}__`));
+    if (exact) return resolve(PHOTOS, exact);
+  }
+
+  const match = files.find((f) => f.startsWith(`${slug}__`));
   return match ? resolve(PHOTOS, match) : null;
 }
 
@@ -196,6 +217,7 @@ function storagePathFor(slug: string, isPrimary: boolean, sortOrder: number, ext
 }
 
 async function main() {
+  console.log(`Source: ${PHOTOS}\n`);
   const urlToLocal = buildUrlToLocalFile();
 
   const { data: products, error: prodErr } = await sb.from("products").select("id, slug, name");

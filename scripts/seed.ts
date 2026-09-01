@@ -119,7 +119,7 @@ async function upsertSettings() {
 
 async function seedCategories() {
   const cats: { path: string; slug: string; name: string; parent_path: string | null; image?: string; desc?: string; sort: number }[] = [
-    { path: "rabochie-perchatki", slug: "rabochie-perchatki", name: "Рабочие перчатки", parent_path: null, image: IMG.g1, desc: "Рабочие перчатки купить в Орске недорого. Перчатки лучшего качества. Доставка транспортными компаниями.", sort: 1 },
+    { path: "rabochie-perchatki", slug: "rabochie-perchatki", name: "Рабочие перчатки", parent_path: null, image: "rabochie-perchatki-v2.jpg", desc: "Рабочие перчатки купить в Орске недорого. Перчатки лучшего качества. Доставка транспортными компаниями.", sort: 1 },
     { path: "rabochie-perchatki/perchatki-hb", slug: "perchatki-hb", name: "Перчатки ХБ", parent_path: "rabochie-perchatki", image: IMG.hb, sort: 1 },
     { path: "rabochie-perchatki/perchatki-hb/perchatki-s-pvh", slug: "perchatki-s-pvh", name: "Перчатки с ПВХ", parent_path: "rabochie-perchatki/perchatki-hb", image: IMG.pvh, sort: 1 },
     { path: "rabochie-perchatki/perchatki-polusherstyanye-i-sherstyanye", slug: "perchatki-polusherstyanye-i-sherstyanye", name: "Перчатки полушерстяные и шерстяные", parent_path: "rabochie-perchatki", image: IMG.psh, sort: 2 },
