@@ -20,19 +20,19 @@ const FORM_FIELDS: Record<FormType, Field[]> = {
     { name: "tel", label: "Телефон", type: "tel", required: true, placeholder: "Свяжемся по этому номеру" },
     { name: "company", label: "Юр. лицо", placeholder: "ООО или ИП" },
     { name: "message", label: "Вопрос", type: "textarea" },
-    { name: "acceptance", label: "Даю согласие на обработку персональных данных", type: "checkbox" },
+    { name: "acceptance", label: "Даю согласие на обработку", type: "checkbox", required: true },
   ],
   price_list: [
     { name: "your-name", label: "Ваше имя", required: true, placeholder: "Ваше имя" },
     { name: "tel", label: "Телефон", type: "tel", required: true, placeholder: "Телефон для связи" },
     { name: "email", label: "Электронная почта", type: "email", required: true, placeholder: "Электронная почта" },
-    { name: "acceptance", label: "Даю согласие на обработку персональных данных", type: "checkbox" },
+    { name: "acceptance", label: "Даю согласие на обработку", type: "checkbox", required: true },
   ],
   product_request: [
     { name: "your-name", label: "Имя", required: true, placeholder: "Константин" },
     { name: "your-email", label: "Email", type: "email", required: true, placeholder: "zakaz@yandex.ru" },
     { name: "tel", label: "Телефон", type: "tel", required: true },
-    { name: "acceptance", label: "Даю согласие на обработку персональных данных", type: "checkbox" },
+    { name: "acceptance", label: "Даю согласие на обработку", type: "checkbox", required: true },
   ],
   product_selection: [
     { name: "tel", label: "Телефон", type: "tel", required: true, placeholder: "Телефон для связи" },
@@ -51,7 +51,7 @@ const FORM_FIELDS: Record<FormType, Field[]> = {
         { value: "Физ.лицо", label: "Физ.лицо" },
       ],
     },
-    { name: "acceptance", label: "Даю согласие на обработку персональных данных", type: "checkbox" },
+    { name: "acceptance", label: "Даю согласие на обработку", type: "checkbox", required: true },
   ],
   logo_application: [
     { name: "company", label: "Компания / название", required: true },
@@ -88,6 +88,13 @@ export function ContactForm({
       if (v != null) payload[f.name] = String(v);
     });
 
+    const acceptanceField = fields.find((f) => f.name === "acceptance" && f.required);
+    if (acceptanceField && payload.acceptance !== "1") {
+      setError("Нужно согласие на обработку персональных данных");
+      setPending(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/forms/", {
         method: "POST",
@@ -116,7 +123,7 @@ export function ContactForm({
         if (f.type === "checkbox") {
           return (
             <label key={f.name} className="form-check">
-              <input type="checkbox" name={f.name} value="1" />
+              <input type="checkbox" name={f.name} value="1" required={f.required} />
               <span>
                 {f.label}{" "}
                 <a href="/privacy-policy/" target="_blank" rel="noreferrer">

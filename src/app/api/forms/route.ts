@@ -32,6 +32,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Пустая форма" }, { status: 400 });
     }
 
+    const needsAcceptance = [
+      "contact",
+      "price_list",
+      "product_request",
+      "partnership",
+    ].includes(formType);
+    if (needsAcceptance && payload.acceptance !== "1" && payload.acceptance !== true) {
+      return NextResponse.json(
+        { error: "Нужно согласие на обработку персональных данных" },
+        { status: 400 }
+      );
+    }
+
     const sb = supabaseForFormsInsert();
     const { error } = await sb.from("form_submissions").insert({
       form_type: formType,
