@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createAnonServerClient } from "@/lib/supabase/anon";
 import type { FormType } from "@/lib/types";
 
 const ALLOWED: FormType[] = [
@@ -10,6 +11,14 @@ const ALLOWED: FormType[] = [
   "partnership",
   "logo_application",
 ];
+
+function supabaseForFormsInsert() {
+  try {
+    return createAdminClient();
+  } catch {
+    return createAnonServerClient();
+  }
+}
 
 export async function POST(req: Request) {
   try {
@@ -23,8 +32,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Пустая форма" }, { status: 400 });
     }
 
-    // Prefer anon insert via service role only for reliability after validation
-    const sb = createAdminClient();
+    const sb = supabaseForFormsInsert();
     const { error } = await sb.from("form_submissions").insert({
       form_type: formType,
       payload,
@@ -40,7 +48,8 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error(err);
     return NextResponse.json({ error: "Ошибка сервера" }, { status: 500 });
   }
 }

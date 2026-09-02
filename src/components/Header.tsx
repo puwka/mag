@@ -58,7 +58,14 @@ export function Header(props: Props) {
     <header className="site-header">
       <div className="top-bar">
         <div className="container top-bar__inner">
-          {noCallBtn}
+          <div className="top-bar__left">
+            {noCallBtn}
+            {props.email ? (
+              <a href={`mailto:${props.email}`} className="top-bar__email">
+                {props.email}
+              </a>
+            ) : null}
+          </div>
           <div className="top-bar__phones">
             {props.phonesDisplay.map((p, i) => (
               <a key={p} href={`tel:${props.phonesTel[i] || p}`} className="btn-black-sm">
