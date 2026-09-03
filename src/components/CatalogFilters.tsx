@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import type { CatalogQuery, FilterAttribute, StockStatus } from "@/lib/types";
 import { buildCatalogQueryString } from "@/lib/catalog-query";
@@ -11,14 +12,16 @@ const STOCK_OPTIONS: { value: StockStatus; label: string }[] = [
   { value: "out_of_stock", label: "Нет в наличии" },
 ];
 
-export function CatalogFilters({
+function FiltersBody({
   path,
   query,
   attributes,
+  onNavigate,
 }: {
   path: string;
   query: CatalogQuery;
   attributes: FilterAttribute[];
+  onNavigate?: () => void;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -26,6 +29,7 @@ export function CatalogFilters({
   function navigate(next: CatalogQuery) {
     const qs = buildCatalogQueryString(next);
     router.push(`${pathname}${qs}`);
+    onNavigate?.();
   }
 
   function toggleFilter(attrSlug: string, valueSlug: string) {
@@ -71,7 +75,7 @@ export function CatalogFilters({
     query.maxPrice != null;
 
   return (
-    <aside className="catalog-sidebar">
+    <>
       <div className="filter-widget">
         <h3 className="filter-widget__title">Прайс-лист</h3>
         <Link href="/prajs-list/" className="btn btn-primary btn-full">
@@ -156,10 +160,62 @@ export function CatalogFilters({
           href={`/${path}/`}
           className="btn btn-outline btn-full"
           style={{ marginTop: 8 }}
+          onClick={onNavigate}
         >
           Сбросить фильтры
         </Link>
       ) : null}
-    </aside>
+    </>
+  );
+}
+
+export function CatalogFilters({
+  path,
+  query,
+  attributes,
+}: {
+  path: string;
+  query: CatalogQuery;
+  attributes: FilterAttribute[];
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        className="catalog-filters-open"
+        aria-label="Открыть фильтры"
+        onClick={() => setOpen(true)}
+      >
+        Фильтры
+      </button>
+
+      <div
+        className={`catalog-filters-backdrop${open ? " is-open" : ""}`}
+        onClick={() => setOpen(false)}
+        aria-hidden={!open}
+      />
+
+      <aside className={`catalog-sidebar${open ? " is-open" : ""}`}>
+        <div className="catalog-sidebar__head">
+          <strong>Фильтры</strong>
+          <button
+            type="button"
+            className="catalog-filters-close"
+            aria-label="Закрыть фильтры"
+            onClick={() => setOpen(false)}
+          >
+            ×
+          </button>
+        </div>
+        <FiltersBody
+          path={path}
+          query={query}
+          attributes={attributes}
+          onNavigate={() => setOpen(false)}
+        />
+      </aside>
+    </>
   );
 }

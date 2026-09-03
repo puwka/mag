@@ -6,7 +6,6 @@ import Image from "next/image";
 import type { City, MenuItem } from "@/lib/types";
 import { mediaUrl } from "@/lib/media";
 import { CitySelector } from "./TopBar";
-import { Modal } from "./Modal";
 import { MainMenu } from "./MainMenu";
 import { MobileMenu } from "./MobileMenu";
 import { Search } from "./Search";
@@ -40,19 +39,43 @@ type Props = {
   mobileMenu: MenuItem[];
 };
 
+function digitsOnly(value: string) {
+  return value.replace(/\D/g, "");
+}
+
 export function Header(props: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [noCall, setNoCall] = useState(false);
   const logo = mediaUrl(props.logo, "site") || props.logo;
   const logoMob = mediaUrl(props.logoMobile, "site") || props.logoMobile;
   const brandAlt = props.brandAlt || "logo";
 
-  const noCallBtn = props.noCallLabel ? (
-    <button type="button" className="btn-link-red" onClick={() => setNoCall(true)}>
-      {props.noCallLabel}
-    </button>
-  ) : null;
+  const waNumber =
+    digitsOnly(props.whatsapp) ||
+    digitsOnly(props.phonesTel[0] || "") ||
+    digitsOnly(props.phones[0] || "");
+  const waText =
+    props.whatsappMessage ||
+    props.noCallText ||
+    "Добрый день! Не смог дозвониться, прошу связаться.";
+  const waHref = waNumber
+    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`
+    : null;
+
+  const noCallBtn =
+    props.noCallLabel && waHref ? (
+      <a
+        href={waHref}
+        className="btn-link-red"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Написать в WhatsApp"
+      >
+        {props.noCallLabel}
+      </a>
+    ) : props.noCallLabel ? (
+      <span className="btn-link-red">{props.noCallLabel}</span>
+    ) : null;
 
   return (
     <header className="site-header">
@@ -177,24 +200,6 @@ export function Header(props: Props) {
       />
       <Search open={searchOpen} onClose={() => setSearchOpen(false)} />
       <Cart />
-
-      <Modal open={noCall} onClose={() => setNoCall(false)}>
-        <p style={{ textAlign: "center" }}>{props.noCallText}</p>
-        {props.whatsapp ? (
-          <p style={{ textAlign: "center" }}>
-            <a
-              className="btn btn-primary"
-              href={`https://wa.me/${props.whatsapp}?text=${encodeURIComponent(
-                props.whatsappMessage || ""
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {props.whatsappSendLabel || "WhatsApp"}
-            </a>
-          </p>
-        ) : null}
-      </Modal>
     </header>
   );
 }

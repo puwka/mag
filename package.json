@@ -11,6 +11,8 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx scripts/seed.ts",
+    "catalog:import": "tsx scripts/import-vitex-catalog.ts",
+    "catalog:export": "tsx scripts/export-catalog-folder.ts",
     "rebrand": "tsx scripts/rebrand-xbtex.ts",
     "images:download": "tsx scripts/download-product-images.ts",
     "images:clean": "python scripts/clean-product-images.py",
@@ -20,6 +22,7 @@
     "images:export-original": "tsx scripts/export-original-product-photos.ts",
     "images:upload": "tsx scripts/upload-product-photos.ts",
     "images:upload-original": "tsx scripts/upload-product-photos.ts --original",
+    "images:upload-catalog-export": "tsx scripts/upload-catalog-export-photos.ts",
     "create-admin": "tsx scripts/create-admin.ts"
   },
   "dependencies": {

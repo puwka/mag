@@ -63,3 +63,11 @@ original/_mask-*
 original/_debug-*
 original/sample-*.jpg
 original/manifest.json
+
+# import / scrape temp
+tmp/
+.tmp/
+catalog-export/
+.npm-cache/
+sample-product.html
+product-sitemap.xml
