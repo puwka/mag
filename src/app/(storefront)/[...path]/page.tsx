@@ -195,10 +195,7 @@ async function InfoPage({ page }: { page: Page }) {
         />
 
         {page.template === "contact" ? (
-          <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 30, marginTop: 30 }}
-            className="contact-grid"
-          >
+          <div className="contact-grid">
             <div>
               <h2 style={{ fontFamily: "var(--font-condensed)" }}>
                 {settingString(settings, "ui.contact_form_title", "Связаться с нами")}
@@ -262,11 +259,6 @@ async function InfoPage({ page }: { page: Page }) {
           </div>
         ) : null}
       </div>
-      <style>{`
-        @media (max-width: 767px) {
-          .contact-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </div>
   );
 }

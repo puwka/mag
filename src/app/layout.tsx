@@ -35,6 +35,13 @@ const roboto = Roboto({
   display: "swap",
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   const siteUrl = getSiteUrl(settings);

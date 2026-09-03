@@ -8,6 +8,8 @@ import {
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { StickyHeader } from "@/components/StickyHeader";
 import { Analytics } from "@/components/Analytics";
 import { JsonLd } from "@/components/JsonLd";
 import { getSiteUrl } from "@/lib/site";
@@ -103,6 +105,8 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
         footerCatalog={footerCatalog}
         footerGloves={footerGloves}
       />
+      <StickyHeader />
+      <ScrollToTop />
       <CookieBanner
         text={settingString(
           settings,

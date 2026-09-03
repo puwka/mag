@@ -15,6 +15,15 @@ import { ContactForm } from "@/components/ContactForm";
 import { Modal } from "@/components/Modal";
 import { ProductCard } from "@/components/ProductCard";
 
+const TAB_ITEMS = [
+  { id: "description", label: "Описание" },
+  { id: "details", label: "Характеристики" },
+  { id: "docs", label: "Документы" },
+  { id: "delivery", label: "Доставка" },
+] as const;
+
+type TabId = (typeof TAB_ITEMS)[number]["id"];
+
 export function ProductView({
   product,
   tiers,
@@ -56,7 +65,7 @@ export function ProductView({
   }));
 
   const [activeIdx, setActiveIdx] = useState(0);
-  const [tab, setTab] = useState("description");
+  const [tab, setTab] = useState<TabId>("description");
   const [qty, setQty] = useState(1);
   const [requestOpen, setRequestOpen] = useState(false);
   const add = useCart((s) => s.add);
@@ -71,6 +80,117 @@ export function ProductView({
     !product.price_on_request &&
     product.pack_price != null &&
     product.stock_status !== "out_of_stock";
+
+  function renderTabContent(id: TabId) {
+    switch (id) {
+      case "description":
+        return (
+          <div>
+            <div
+              className="prose"
+              dangerouslySetInnerHTML={{ __html: product.description || "" }}
+            />
+            {tiers.length ? (
+              <div style={{ marginTop: 20 }}>
+                <h3>Оптовые условия</h3>
+                <table className="attrs-table">
+                  <tbody>
+                    {tiers.map((t) => (
+                      <tr key={t.id}>
+                        <th>
+                          {t.min_pairs}
+                          {t.max_pairs != null ? `–${t.max_pairs}` : "+"} пар
+                        </th>
+                        <td>{t.price_per_pair} ₽ / пара</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+          </div>
+        );
+      case "details":
+        return (
+          <table className="attrs-table">
+            <tbody>
+              {product.sku ? (
+                <tr>
+                  <th>Артикул</th>
+                  <td>{product.sku}</td>
+                </tr>
+              ) : null}
+              <tr>
+                <th>Статус</th>
+                <td>{stock.text}</td>
+              </tr>
+              {product.pairs_per_pack ? (
+                <tr>
+                  <th>Количество в упаковке</th>
+                  <td>{product.pairs_per_pack} пар</td>
+                </tr>
+              ) : null}
+              {product.weight_grams ? (
+                <tr>
+                  <th>Вес (гр.)</th>
+                  <td>{product.weight_grams}</td>
+                </tr>
+              ) : null}
+              {attributes.map((a) => (
+                <tr key={`${a.attribute_slug}-${a.value_slug}`}>
+                  <th>{a.attribute_name}</th>
+                  <td>
+                    {a.color_hex ? (
+                      <span
+                        className="filter-swatch"
+                        style={{ background: a.color_hex, marginRight: 6 }}
+                      />
+                    ) : null}
+                    {a.value_name}
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <th>Производитель</th>
+                <td>{site?.brand || "—"}</td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      case "docs":
+        return documents.length ? (
+          <ul>
+            {documents.map((d) => {
+              const href = mediaUrl(d.storage_path, "products");
+              return (
+                <li key={d.id}>
+                  {href ? (
+                    <a href={href} target="_blank" rel="noreferrer">
+                      {d.title}
+                    </a>
+                  ) : (
+                    <span>{d.title}</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p>Документы появятся позже.</p>
+        );
+      case "delivery":
+        return site?.deliveryHtml ? (
+          <div
+            className="prose"
+            dangerouslySetInnerHTML={{ __html: site.deliveryHtml }}
+          />
+        ) : (
+          <p>
+            Подробнее — на странице <Link href="/dostavka/">Доставка</Link>.
+          </p>
+        );
+    }
+  }
 
   return (
     <div className="product-page">
@@ -101,12 +221,7 @@ export function ProductView({
                         onClick={() => setActiveIdx(i)}
                         aria-label={`Фото ${i + 1}`}
                       >
-                        <Image
-                          src={im.url}
-                          alt=""
-                          width={80}
-                          height={80}
-                        />
+                        <Image src={im.url} alt="" width={80} height={80} />
                       </button>
                     </li>
                   ) : null
@@ -133,8 +248,12 @@ export function ProductView({
                 ? `За пару: ${product.price_per_pair}₽`
                 : null}
             </div>
-            <div style={{ marginTop: 16, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button type="button" className="btn btn-primary" onClick={() => setRequestOpen(true)}>
+            <div className="product-summary__actions">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setRequestOpen(true)}
+              >
                 Оставить заявку
               </button>
               {site?.phoneTel ? (
@@ -181,7 +300,7 @@ export function ProductView({
             ) : product.stock_status === "out_of_stock" ? (
               <p style={{ marginTop: 16 }}>Товар временно отсутствует.</p>
             ) : null}
-            <div style={{ marginTop: 16, fontSize: 13 }}>
+            <div className="product-share">
               Поделиться:{" "}
               <a
                 href={`https://vk.com/share.php?url=${encodeURIComponent(
@@ -206,12 +325,7 @@ export function ProductView({
 
         <div className="product-tabs">
           <div className="product-tabs__nav">
-            {[
-              ["description", "Описание"],
-              ["details", "Характеристики"],
-              ["docs", "Документы"],
-              ["delivery", "Доставка"],
-            ].map(([id, label]) => (
+            {TAB_ITEMS.map(({ id, label }) => (
               <button
                 key={id}
                 type="button"
@@ -222,120 +336,36 @@ export function ProductView({
               </button>
             ))}
           </div>
-          <div className="product-tabs__panel">
-            {tab === "description" ? (
-              <div>
-                <div
-                  className="prose"
-                  dangerouslySetInnerHTML={{ __html: product.description || "" }}
-                />
-                {tiers.length ? (
-                  <div style={{ marginTop: 20 }}>
-                    <h3>Оптовые условия</h3>
-                    <table className="attrs-table">
-                      <tbody>
-                        {tiers.map((t) => (
-                          <tr key={t.id}>
-                            <th>
-                              {t.min_pairs}
-                              {t.max_pairs != null ? `–${t.max_pairs}` : "+"} пар
-                            </th>
-                            <td>{t.price_per_pair} ₽ / пара</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+          <div className="product-tabs__panel">{renderTabContent(tab)}</div>
+          <div className="product-tabs__accordion">
+            {TAB_ITEMS.map(({ id, label }) => (
+              <div
+                key={id}
+                className={`product-tab-acc${tab === id ? " is-open" : ""}`}
+              >
+                <button
+                  type="button"
+                  className="product-tab-acc__head"
+                  aria-expanded={tab === id}
+                  onClick={() => setTab(id)}
+                >
+                  {label}
+                  <span className="product-tab-acc__icon" aria-hidden>
+                    {tab === id ? "−" : "+"}
+                  </span>
+                </button>
+                {tab === id ? (
+                  <div className="product-tab-acc__body">{renderTabContent(id)}</div>
                 ) : null}
               </div>
-            ) : null}
-            {tab === "details" ? (
-              <table className="attrs-table">
-                <tbody>
-                  {product.sku ? (
-                    <tr>
-                      <th>Артикул</th>
-                      <td>{product.sku}</td>
-                    </tr>
-                  ) : null}
-                  <tr>
-                    <th>Статус</th>
-                    <td>{stock.text}</td>
-                  </tr>
-                  {product.pairs_per_pack ? (
-                    <tr>
-                      <th>Количество в упаковке</th>
-                      <td>{product.pairs_per_pack} пар</td>
-                    </tr>
-                  ) : null}
-                  {product.weight_grams ? (
-                    <tr>
-                      <th>Вес (гр.)</th>
-                      <td>{product.weight_grams}</td>
-                    </tr>
-                  ) : null}
-                  {attributes.map((a) => (
-                    <tr key={`${a.attribute_slug}-${a.value_slug}`}>
-                      <th>{a.attribute_name}</th>
-                      <td>
-                        {a.color_hex ? (
-                          <span
-                            className="filter-swatch"
-                            style={{ background: a.color_hex, marginRight: 6 }}
-                          />
-                        ) : null}
-                        {a.value_name}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <th>Производитель</th>
-                    <td>{site?.brand || "—"}</td>
-                  </tr>
-                </tbody>
-              </table>
-            ) : null}
-            {tab === "docs" ? (
-              documents.length ? (
-                <ul>
-                  {documents.map((d) => {
-                    const href = mediaUrl(d.storage_path, "products");
-                    return (
-                      <li key={d.id}>
-                        {href ? (
-                          <a href={href} target="_blank" rel="noreferrer">
-                            {d.title}
-                          </a>
-                        ) : (
-                          <span>{d.title}</span>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : (
-                <p>Документы появятся позже.</p>
-              )
-            ) : null}
-            {tab === "delivery" ? (
-              site?.deliveryHtml ? (
-                <div
-                  className="prose"
-                  dangerouslySetInnerHTML={{ __html: site.deliveryHtml }}
-                />
-              ) : (
-                <p>
-                  Подробнее — на странице <Link href="/dostavka/">Доставка</Link>.
-                </p>
-              )
-            ) : null}
+            ))}
           </div>
         </div>
 
         {related.length ? (
-          <section style={{ marginTop: 40 }}>
+          <section className="product-related">
             <h2 className="section-title">Похожие</h2>
-            <div className="product-grid">
+            <div className="product-grid product-related__grid">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

@@ -194,6 +194,20 @@ export function Header(props: Props) {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         items={props.mobileMenu}
+        searchSlot={
+          props.searchLabel ? (
+            <button
+              type="button"
+              className="mobile-search-trigger"
+              onClick={() => {
+                setMobileOpen(false);
+                setSearchOpen(true);
+              }}
+            >
+              {props.searchLabel}
+            </button>
+          ) : null
+        }
         citySlot={
           <CitySelector cities={props.cities} selectLabel={props.citySelectLabel} />
         }
