@@ -19,21 +19,21 @@ export function ProductCard({
     <article className="product-card">
       <Link href={href} className="product-card__media">
         {img ? (
-          <Image src={img} alt={product.name} width={400} height={400} sizes="(max-width:767px) 50vw, 25vw" />
+          <Image src={img} alt={product.name} width={400} height={400} sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" />
         ) : (
           <div style={{ width: "100%", height: "100%", background: "#eee" }} />
         )}
+        <span className={`${stock.className} product-card__stock-badge`}>{stock.text}</span>
       </Link>
       <div className="product-card__body">
         <h3 className="product-card__title">
           <Link href={href}>{product.name}</Link>
         </h3>
-        <div className={stock.className + " product-card__stock"}>{stock.text}</div>
         <div className="product-card__price">
           {formatPackPrice(product.pack_price, product.pairs_per_pack, product.price_on_request)}
         </div>
         {pair ? <div className="product-card__pair">{pair}</div> : null}
-        <Link href={href} className="btn btn-primary">
+        <Link href={href} className="btn btn-primary product-card__buy">
           {buyLabel}
         </Link>
       </div>

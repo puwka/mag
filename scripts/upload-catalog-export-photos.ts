@@ -147,7 +147,7 @@ async function main() {
       for (let j = 0; j < images.length; j++) {
         const localPath = images[j];
         const ext = extname(localPath).toLowerCase() || ".jpg";
-        const storagePath = `catalog/${slug}/0${j + 1}${ext}`;
+        const storagePath = `catalog/v3/${slug}/0${j + 1}${ext}`;
         const body = readFileSync(localPath);
         const { error: upErr } = await sb.storage
           .from(BUCKET)

@@ -158,7 +158,9 @@ function renderSection(
       return (
         <section key={key} className="home-categories">
           <div className="container">
-            {section.title ? <h2 className="section-title">{section.title}</h2> : null}
+            {section.title ? (
+              <h2 className="section-title section-title--products">{section.title}</h2>
+            ) : null}
             {sectionDescription(section) ? (
               <p className="section-lead">{sectionDescription(section)}</p>
             ) : null}
@@ -294,31 +296,37 @@ function Hero({ section }: { section: HomepageSection }) {
   const desc = sectionDescription(section);
 
   return (
-    <section
-      className="hero"
-      style={bg ? { backgroundImage: `url(${bg})` } : undefined}
-    >
-      <div className="container hero__inner">
-        <div className="hero__text">
-          {section.title ? <h1>{section.title}</h1> : null}
-          {section.subtitle ? <p className="hero__sub">{section.subtitle}</p> : null}
-          {desc ? <p className="hero__sub">{desc}</p> : null}
-          {cta && ctaLabel ? (
-            <Link href={cta} className="btn btn-hero">
-              {ctaLabel}
-            </Link>
-          ) : null}
-        </div>
-        <div className="hero__media">
-          {img ? (
-            <Image
-              src={img}
-              alt={String(cfg.image_alt || section.title || "")}
-              width={460}
-              height={276}
-              priority
-            />
-          ) : null}
+    <section className="hero">
+      <div className="container">
+        <div
+          className="hero__banner"
+          style={bg ? { backgroundImage: `url(${bg})` } : undefined}
+        >
+          <div className="hero__inner">
+            <div className="hero__text">
+              {section.title ? <h1>{section.title}</h1> : null}
+              {section.subtitle ? <p className="hero__sub">{section.subtitle}</p> : null}
+              {desc ? <p className="hero__sub">{desc}</p> : null}
+              {cta && ctaLabel ? (
+                <Link href={cta} className="btn btn-hero">
+                  {ctaLabel}
+                </Link>
+              ) : null}
+            </div>
+            <div className="hero__media">
+              {img ? (
+                <Image
+                  src={img}
+                  alt={String(cfg.image_alt || section.title || "")}
+                  width={460}
+                  height={276}
+                  priority
+                  sizes="(max-width: 767px) 70vw, 460px"
+                  style={{ width: "auto", height: "auto", maxWidth: "100%" }}
+                />
+              ) : null}
+            </div>
+          </div>
         </div>
       </div>
     </section>

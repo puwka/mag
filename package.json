@@ -23,6 +23,7 @@
     "images:upload": "tsx scripts/upload-product-photos.ts",
     "images:upload-original": "tsx scripts/upload-product-photos.ts --original",
     "images:upload-catalog-export": "tsx scripts/upload-catalog-export-photos.ts",
+    "images:clean-blotches": "python scripts/clean_catalog_export_blotches.py",
     "create-admin": "tsx scripts/create-admin.ts"
   },
   "dependencies": {

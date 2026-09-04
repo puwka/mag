@@ -26,9 +26,9 @@ export function ProductGrid({
   }
 
   return (
-    <section style={{ padding: "30px 0" }}>
+    <section className="home-products">
       <div className="container">
-        {title ? <h2 className="section-title">{title}</h2> : null}
+        {title ? <h2 className="section-title section-title--products">{title}</h2> : null}
         {grid}
       </div>
     </section>
